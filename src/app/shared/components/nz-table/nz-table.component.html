@@ -1,0 +1,44 @@
+<input
+  #searchBox
+  nz-input
+  placeholder="Search..."
+  [(ngModel)]="searchText"
+  (ngModelChange)="applySearch()"
+  style="width: 300px; margin: 12px"
+/>
+<nz-table
+  #basicTable
+  [nzData]="viewData"
+  [nzBordered]="config.bordered"
+  [nzPageSize]="pageSize"
+  [(nzPageIndex)]="pageIndex"
+>
+  <thead>
+    <tr>
+      <th
+        *ngFor="let col of config.columns"
+        scope="col"
+        [nzAlign]="col.align ?? null"
+        (click)="col.sortable && sort(col.key)"
+        style="cursor: pointer"
+      >
+        {{ col.title }}
+
+        <span *ngIf="col.sortable">
+          <ng-container *ngIf="sortKey === col.key; else defaultIcon">
+            {{ sortOrder === "asc" ? "⬆️" : "⬇️" }}
+          </ng-container>
+          <ng-template #defaultIcon> </ng-template>
+        </span>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let row of basicTable.data">
+      <td *ngFor="let col of config.columns" [nzAlign]="col.align ?? null">
+        {{ getNestedValue(row, col.key) }}
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
