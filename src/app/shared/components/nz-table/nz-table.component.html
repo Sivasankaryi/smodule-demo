@@ -22,23 +22,35 @@
         (click)="col.sortable && sort(col.key)"
         style="cursor: pointer"
       >
-        {{ col.title }}
+{{ col.title }}
 
-        <span *ngIf="col.sortable">
-          <ng-container *ngIf="sortKey === col.key; else defaultIcon">
-            {{ sortOrder === "asc" ? "⬆️" : "⬇️" }}
-          </ng-container>
-          <ng-template #defaultIcon> </ng-template>
-        </span>
+<span *ngIf="col.sortable" style="margin-left: 6px">
+
+  <span>⇅</span>
+</span>
       </th>
     </tr>
   </thead>
-
-  <tbody>
-    <tr *ngFor="let row of basicTable.data">
-      <td *ngFor="let col of config.columns" [nzAlign]="col.align ?? null">
+<tbody>
+<tr 
+  *ngFor="let row of basicTable.data"
+  (click)="onRowClick(row)"
+  style="cursor: pointer"
+>
+    <td *ngFor="let col of config.columns" [nzAlign]="col.align ?? null">
+      <ng-container *ngIf="cellTemplate; else defaultCell">
+        <ng-container
+          *ngTemplateOutlet="
+            cellTemplate;
+            context: { $implicit: row, column: col }
+          "
+        ></ng-container>
+      </ng-container>
+      <ng-template #defaultCell>
         {{ getNestedValue(row, col.key) }}
-      </td>
-    </tr>
-  </tbody>
+      </ng-template>
+    </td>
+  </tr>
+</tbody>
+
 </nz-table>

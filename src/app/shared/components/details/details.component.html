@@ -1,0 +1,32 @@
+<div class="modal-backdrop">
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h2 class="h2">Row Details</h2>
+      <button class="close-btn" (click)="goBack()">✖</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="id-row">
+        <strong>Selected ID:</strong>
+        <span>{{ id }}</span>
+      </div>
+
+      <hr />
+
+      <div class="details-grid">
+        <div class="detail-item" *ngFor="let item of rowData | keyvalue">
+          <span class="key">{{ item.key }}</span>
+          <span class="value">{{ item.value }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-primary" (click)="goBack()">Close</button>
+    </div>
+
+  </div>
+</div>

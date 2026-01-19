@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NzTableComponent } from '../../../shared/components/nz-table/nz-table.component';
 import { SharedTableConfig } from '../../../shared/components/nz-table/nz-table.modal';
