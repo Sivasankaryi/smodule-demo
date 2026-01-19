@@ -1,1 +1,24 @@
-<p>pon-capacity works!</p>
+<app-nz-table [config]="ponTableConfig">
+
+<ng-template #customCell let-row let-column>
+
+  <div (click)="$event.stopPropagation()">
+
+    <span *ngIf="column.key === 'dsUtilExCnt'" style="color: green;">
+      📉 {{ row.dsUtilExCnt }}
+    </span>
+
+    <span *ngIf="column.key === 'usUtilExCnt'" style="color: red;">
+      📈 {{ row.usUtilExCnt }}
+    </span>
+
+    <span *ngIf="column.key !== 'dsUtilExCnt' && column.key !== 'usUtilExCnt'">
+      {{ row[column.key] }}
+    </span>
+
+  </div>
+
+</ng-template>
+
+
+</app-nz-table>
