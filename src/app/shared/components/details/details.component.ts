@@ -22,11 +22,9 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id')!;
-
       this.rowData = history.state.rowData;
-
-    console.log('ID from URL:', this.id);
-    console.log('Row Data:', this.rowData);
+    // console.log('ID from URL:', this.id);
+    // console.log('Row Data:', this.rowData);
   }
 
   goBack() {

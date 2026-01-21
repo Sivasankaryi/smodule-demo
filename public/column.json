@@ -3,7 +3,7 @@
         "groupBy": "REGION",
         "id": "15ce5dad-db04-4a47-9375-647ad5fd3bcd",
         "name": "ctm_314050-2025-10-14-04:31:51.927203",
-        "isDeleted": false,
+        "isDeleted": true,
         "txDis": 0,
         "rxDis": 0
     },
@@ -11,7 +11,7 @@
         "groupBy": "REGION",
         "id": "d4451550-5c23-48f9-bd7a-4d35cccfa465",
         "name": "ctm_314050-2025-09-10-03:57:52.064810",
-        "isDeleted": false,
+        "isDeleted": true,
         "txDis": 0,
         "rxDis": 0
     },
@@ -75,7 +75,7 @@
         "groupBy": "REGION",
         "id": "58c39a0a-e00f-410c-b8da-602621bb9dc8",
         "name": "ctm_314050-2025-10-22-00:32:36.093012",
-        "isDeleted": false,
+        "isDeleted": true,
         "txDis": 0,
         "rxDis": 0
     },
@@ -83,7 +83,7 @@
         "groupBy": "REGION",
         "id": "31044506-de87-48c5-8587-025130c7db45",
         "name": "ctm_314050-2025-10-22-09:58:07.328288",
-        "isDeleted": false,
+        "isDeleted": true,
         "txDis": 0,
         "rxDis": 0
     },

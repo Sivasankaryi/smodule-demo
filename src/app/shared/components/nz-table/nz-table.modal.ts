@@ -1,16 +1,19 @@
 import { TemplateRef } from '@angular/core';
-import { NzTableSize } from 'ng-zorro-antd/table';
+export type ColumnType = 'text' | 'templateRef';
+
 export interface TableColumn {
   title: string;
   key: string;
-  align?: 'left';
-  sortable?:boolean;
+  sortable?: boolean;
+  align?: 'left' | 'center' | 'right';
+  type?: ColumnType;
+  template?: TemplateRef<any> | null;
 }
 
 export interface SharedTableConfig {
   columns: TableColumn[];
-  bordered?: boolean; 
-  size?: NzTableSize;
   data: any[];
-  cellTemplate?: TemplateRef<any>;
+  bordered?: boolean;
+  showEntries?: boolean;
+showSearch?: boolean;
 }
