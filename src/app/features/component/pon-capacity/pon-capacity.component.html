@@ -4,13 +4,13 @@
 
   <div (click)="$event.stopPropagation()">
 
-    <span *ngIf="column.key === 'dsUtilExCnt'" style="color: green;">
-      📉 {{ row.dsUtilExCnt }}
+    <!-- <span *ngIf="column.key === 'dsUtilExCnt'" style="color: green;">
+       {{ row.dsUtilExCnt }}
     </span>
 
     <span *ngIf="column.key === 'usUtilExCnt'" style="color: red;">
-      📈 {{ row.usUtilExCnt }}
-    </span>
+      {{ row.usUtilExCnt }}
+    </span> -->
 
     <span *ngIf="column.key !== 'dsUtilExCnt' && column.key !== 'usUtilExCnt'">
       {{ row[column.key] }}

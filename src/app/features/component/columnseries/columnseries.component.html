@@ -1,3 +1,23 @@
-<app-nz-table
-  [config]="columnTableConfig">
-</app-nz-table>
+<app-nz-table [config]="columnTableConfig"
+[rowClickable]="rowClickable"
+></app-nz-table>
+
+<ng-template #regionTemplate let-row="row">
+  <span
+    (click)="onRegionClick(row, $event)"
+    style="font-weight:600; color:#1677ff; cursor:pointer; text-decoration: underline;"
+  >
+   {{ row.name }}
+  </span>
+</ng-template>
+
+
+<ng-template #statusTemplate let-row="row">
+  <span
+    [style.color]="row.isDeleted ? 'red' : 'green'"
+    style="font-weight:600"
+  >
+    {{ row.isDeleted ? 'Deleted' : 'Active' }}
+  </span>
+</ng-template>
+

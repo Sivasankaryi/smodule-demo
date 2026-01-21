@@ -1,56 +1,85 @@
-<input
-  #searchBox
-  nz-input
-  placeholder="Search..."
-  [(ngModel)]="searchText"
-  (ngModelChange)="applySearch()"
-  style="width: 300px; margin: 12px"
-/>
+<div
+  *ngIf="config.showEntries || config.showSearch"
+  style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; margin-top:12px"
+>
+  <!-- Show entries -->
+  <div *ngIf="config.showEntries">
+    Show
+    <select
+      [(ngModel)]="pageSize"
+      (ngModelChange)="onPageSizeChange($event)"
+      style="margin:0 6px; padding:4px"
+    >
+      <option *ngFor="let size of pageSizeOptions" [value]="size">
+        {{ size === -1 ? 'All' : size }}
+      </option>
+    </select>
+    entries
+  </div>
+
+  <!-- Search -->
+  <div *ngIf="config.showSearch">
+    <input
+      nz-input
+      placeholder="Search..."
+      [(ngModel)]="searchText"
+      (ngModelChange)="applySearch()"
+      style="width: 200px;"
+    />
+  </div>
+</div>
+
 <nz-table
   #basicTable
   [nzData]="viewData"
   [nzBordered]="config.bordered"
   [nzPageSize]="pageSize"
   [(nzPageIndex)]="pageIndex"
+  [nzShowPagination]="true"
+  [nzNoResult]="noData"
+ 
 >
   <thead>
     <tr>
       <th
         *ngFor="let col of config.columns"
-        scope="col"
         [nzAlign]="col.align ?? null"
         (click)="col.sortable && sort(col.key)"
         style="cursor: pointer"
       >
-{{ col.title }}
-
-<span *ngIf="col.sortable" style="margin-left: 6px">
-
-  <span>⇅</span>
-</span>
+        {{ col.title }}
       </th>
     </tr>
   </thead>
+
 <tbody>
-<tr 
+<tr
   *ngFor="let row of basicTable.data"
   (click)="onRowClick(row)"
-  style="cursor: pointer"
+  [class.invalid-row]="rowClickable && !rowClickable(row)"
+  [title]="rowClickable && !rowClickable(row) ? 'This row is Deleted and cannot be clicked' : ''"
+  [style.cursor]="rowClickable && !rowClickable(row) ? 'not-allowed' : 'pointer'"
 >
-    <td *ngFor="let col of config.columns" [nzAlign]="col.align ?? null">
-      <ng-container *ngIf="cellTemplate; else defaultCell">
+  <td *ngFor="let col of config.columns" [nzAlign]="col.align ?? null">
+    <ng-container [ngSwitch]="col.type">
+      <ng-container *ngSwitchCase="'templateRef'">
         <ng-container
-          *ngTemplateOutlet="
-            cellTemplate;
-            context: { $implicit: row, column: col }
-          "
+          *ngTemplateOutlet="col.template ?? null; context: { row: row, column: col }"
         ></ng-container>
       </ng-container>
-      <ng-template #defaultCell>
+      <ng-container *ngSwitchDefault>
         {{ getNestedValue(row, col.key) }}
-      </ng-template>
-    </td>
-  </tr>
+      </ng-container>
+    </ng-container>
+  </td>
+</tr>
+
 </tbody>
 
 </nz-table>
+
+<ng-template #noData>
+  <div style="padding: 24px; text-align: center; color: #999">
+    No data available
+  </div>
+</ng-template>

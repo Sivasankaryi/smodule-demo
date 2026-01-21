@@ -22,6 +22,8 @@ export class PonCapacityComponent implements OnInit {
   ngOnInit(): void {
     this.ponTableConfig = {
       bordered: true,
+        //  showEntries: true,
+    showSearch: true,
       columns: [
         { title: 'Region', key: 'regionName', sortable: true },
         { title: 'Location', key: 'locationName', sortable: true },
@@ -31,7 +33,6 @@ export class PonCapacityComponent implements OnInit {
         { title: 'Interface', key: 'interface', sortable: false }
       ],
       data: [],
-      cellTemplate: this.cellTemplate 
     };
 
     this.http.get<any[]>('/pon.json').subscribe(res => {
